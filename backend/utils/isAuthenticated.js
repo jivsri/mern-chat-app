@@ -6,7 +6,7 @@ export const isAuthenticated = async (req, res, next) => {
         if (!token) {
             return res.status(404).json({
                 success: false,
-                message: "User not logged in",
+                message: "Cookie not found",
             });
         }
         let decoded = jwt.decode(token, process.env.JWT_SECRET);

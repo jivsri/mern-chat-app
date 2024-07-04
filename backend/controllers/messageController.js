@@ -50,21 +50,18 @@ export const getMessage=async(req,res)=>{
         const {id}=req.params;
         const senderId=req.user._id;
 
+        console.log("params: ",id);
+        console.log("sender: ",senderId);
+
         const conversation=await Conversation.findOne({
             participants: {$all: [senderId,id]},
         }).populate("messages");
 
-        if(!conversation){
-            return res.status(400).json({
-                success: true,
-                messages: [],
-            });
-        }
-
+        // console.log("conversation from server:",conversation);
         
         return res.status(200).json({
             success: true,
-            messages: conversation.messages,
+            messages: conversation?.messages,
         });
 
         
@@ -73,6 +70,7 @@ export const getMessage=async(req,res)=>{
         console.log("error detected",error);
         return res.status(500).json({
             success: false,
+            messages: [],
             message: "internal server error"
         });
     }

@@ -47,7 +47,7 @@ export const signupController=async (req,res,next)=>{
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "internal server error",
+            message: error.message,
         });
     }
 };
@@ -56,6 +56,7 @@ export const signupController=async (req,res,next)=>{
 export const loginController=async(req,res,next)=>{
     try {
         const {userName,password}=req.body;
+        console.log("received: ",{userName,password});
         let user=await User.findOne({userName});
         if(!user){
             return res.status(400).json({
@@ -100,7 +101,7 @@ export const logoutController=(req,res,next)=>{
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "internal server error",
+            message: error.message,
         });
     }
 }
