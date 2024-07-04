@@ -12,9 +12,10 @@ export default function Message({message}) {
     const bgColor=fromMe?"bg-blue-500":"";
 
     const formattedTime=extractTime(message.createdAt);
-    console.log("msgsender:",message.senderId);
-    console.log("loggedin user:",authUser.user._id);
-    console.log("fromme:",fromMe);
+    const shakeClass=message.shouldShake?"shake":"";
+    // console.log("msgsender:",message.senderId);
+    // console.log("loggedin user:",authUser.user._id);
+    // console.log("fromme:",fromMe);
 
     return (
         <>
@@ -26,7 +27,7 @@ export default function Message({message}) {
                             src={profilePicture} />
                     </div>
                 </div>
-                <div className={`chat-bubble text-white ${bgColor} `}>{message.message}</div>
+                <div className={`chat-bubble text-white ${bgColor} ${shakeClass} `}>{message.message}</div>
                 <div className="chat-footer opacity-50 text-xs">{formattedTime}</div>
             </div>
 
